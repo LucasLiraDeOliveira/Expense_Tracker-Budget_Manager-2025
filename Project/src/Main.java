@@ -9,5 +9,8 @@ public class Main {
         ExpenseRepository repository = new ExpenseRepository();
         ExpenseService service = new ExpenseService(repository);
         ConsoleMenu menu = new ConsoleMenu(service);
+
+
+        menu.start();
     }
 }
