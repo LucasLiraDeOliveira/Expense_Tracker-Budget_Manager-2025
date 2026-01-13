@@ -127,7 +127,7 @@ public class ConsoleMenu {
         long idNumber = scanner.nextLong();
 
         boolean removed = service.removeExpenseById(idNumber);
-        
+
         if (removed){
             System.out.println("Expense removed.");
         } else {
