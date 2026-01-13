@@ -120,4 +120,18 @@ public class ConsoleMenu {
         service.addExpense(newExpense);
         System.out.println("Expense added!");
     }
+
+
+    private void RemoveExpense(){
+        System.out.println("What is the ID of the expense that you want to remove?");
+        long idNumber = scanner.nextLong();
+
+        boolean removed = service.removeExpenseById(idNumber);
+        
+        if (removed){
+            System.out.println("Expense removed.");
+        } else {
+            System.out.println("No expense found with that ID.");
+        }
+    }
 }
