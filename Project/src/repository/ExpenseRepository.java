@@ -5,6 +5,7 @@ import model.Expense;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public class ExpenseRepository {
@@ -16,6 +17,12 @@ public class ExpenseRepository {
 
     public void remove(Expense expense){
         expenseSet.remove(expense);
+    }
+
+    public Optional<Expense> findById(long idNumber){
+        return expenseSet.stream()
+                .filter(e -> e.getId() == idNumber)
+                .findFirst();
     }
 
     public List<Expense> findAll(){
