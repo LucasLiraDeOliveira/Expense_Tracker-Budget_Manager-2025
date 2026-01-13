@@ -1,5 +1,6 @@
 package service;
 
+import model.Expense;
 import repository.ExpenseRepository;
 
 public class ExpenseService {
@@ -7,5 +8,11 @@ public class ExpenseService {
 
     public ExpenseService(ExpenseRepository repository) {
         this.repository = repository;
+    }
+
+
+
+    public void addExpense(Expense expense){
+        repository.add(expense);
     }
 }
