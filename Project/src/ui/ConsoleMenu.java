@@ -145,10 +145,10 @@ public class ConsoleMenu {
             int option = readOption();
 
             switch (option) {
-                case 1 -> service.ListByCategory();
-                case 2 -> service.ListByTime();
-                case 3 -> service.ListByAmount();
-                case 4 -> service.ListByPaymentMethod();
+                case 1 -> ListByCategoryMenu();
+                case 2 -> ListByTimeMenu();
+                case 3 -> ListByAmountMenu();
+                case 4 -> ListByPaymentMethodMenu();
                 case 0 -> running = false;
                 default -> System.out.println("Invalid option");
             }
