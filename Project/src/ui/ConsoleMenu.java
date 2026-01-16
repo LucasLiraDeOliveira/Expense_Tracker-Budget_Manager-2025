@@ -32,7 +32,7 @@ public class ConsoleMenu {
             switch (option) {
                 case 1 -> AddExpense();
                 case 2 -> RemoveExpense();
-                case 3 -> ListingExpense();
+                case 3 -> ListingExpenseMenu();
                 case 4 -> AnalysingExpense();
                 case 0 -> running = false;
                 default -> System.out.println("Invalid option");
@@ -132,6 +132,26 @@ public class ConsoleMenu {
             System.out.println("Expense removed.");
         } else {
             System.out.println("No expense found with that ID.");
+        }
+    }
+
+
+    private void ListingExpenseMenu(){
+        boolean running = true;
+
+        while (running){
+            System.out.println("Do you want to list your expenses by what:\n1- List by Category\n2 - List By time\n3 " +
+                    "- List by amount range\n4 - List by payment method\nBack to main menu");
+            int option = readOption();
+
+            switch (option) {
+                case 1 -> service.ListByCategory();
+                case 2 -> service.ListByTime();
+                case 3 -> service.ListByAmount();
+                case 4 -> service.ListByPaymentMethod();
+                case 0 -> running = false;
+                default -> System.out.println("Invalid option");
+            }
         }
     }
 }
