@@ -1,8 +1,11 @@
 package service;
 
+import model.Category;
 import model.Expense;
 import repository.ExpenseRepository;
 
+import java.util.Calendar;
+import java.util.List;
 import java.util.Optional;
 
 public class ExpenseService {
@@ -28,5 +31,10 @@ public class ExpenseService {
         }
 
         return  false;
+    }
+
+
+    public List<Expense> ListByCategory(Category category){
+        return repository.findByCategory(category);
     }
 }
