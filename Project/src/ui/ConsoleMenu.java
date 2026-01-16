@@ -168,6 +168,6 @@ public class ConsoleMenu {
         System.out.println("Do you want to list your expenses by which Category?");
         Category category = pickCategory();
 
-        service.ListByCategoryMenu(category);
+        service.ListByCategory(category);
     }
 }
