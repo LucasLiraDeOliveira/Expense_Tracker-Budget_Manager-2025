@@ -62,21 +62,8 @@ public class ConsoleMenu {
 
         // Category attribute part:
         scanner.nextLine(); // clear leftover newline
-        Category category = null;
-
-        while (category == null) {
-            System.out.print("What's the category of this Expense? \nThe possibilities are:\nFOOD,\nTRANSPORT,\n" +
-                    "HOUSING,\nEDUCATION,\nHEALTH,\nINVESTMENTS,\nSHOPPING,\nENTERTAINMENT,\nEMERGENCY");
-            String input = scanner.nextLine().trim();
-
-            if (input.isEmpty()) continue;
-
-            try {
-                category = Category.valueOf(input.toUpperCase());
-            } catch (IllegalArgumentException e) {
-                System.out.println("Invalid priority. Try again.\n");
-            }
-        }
+        System.out.println("What's the category of this Expense?");
+        Category category = pickCategory();
 
 
         // Payment Method attribute part:
@@ -119,6 +106,26 @@ public class ConsoleMenu {
 
         service.addExpense(newExpense);
         System.out.println("Expense added!");
+    }
+
+
+    private Category pickCategory(){
+        Category category = null;
+
+        while (category == null) {
+            System.out.print("The possibilities are:\nFOOD,\nTRANSPORT,\nHOUSING,\nEDUCATION,\nHEALTH,\nINVESTMENTS," +
+                    "\nSHOPPING,\nENTERTAINMENT,\nEMERGENCY");
+            String input = scanner.nextLine().trim();
+
+            if (input.isEmpty()) continue;
+
+            try {
+                category = Category.valueOf(input.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid priority. Try again.\n");
+            }
+        }
+        return category;
     }
 
 
