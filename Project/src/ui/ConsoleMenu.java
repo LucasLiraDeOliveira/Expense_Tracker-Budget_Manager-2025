@@ -7,6 +7,7 @@ import service.ExpenseService;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleMenu {
@@ -168,6 +169,7 @@ public class ConsoleMenu {
         System.out.println("Do you want to list your expenses by which Category?");
         Category category = pickCategory();
 
-        service.ListByCategory(category);
+         List<Expense> expenseList = service.ListByCategory(category);
+         expenseList.forEach(System.out::println);
     }
 }
