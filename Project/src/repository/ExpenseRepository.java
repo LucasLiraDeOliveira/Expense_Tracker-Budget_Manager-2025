@@ -28,4 +28,10 @@ public class ExpenseRepository {
     public List<Expense> findAll(){
         return List.copyOf(expenseSet);
     }
+
+    public List<Expense> findByCategory(Category category){
+        return expenseSet.stream()
+                .filter(e -> e.getCategory() == category)
+                .toList();
+    }
 }
