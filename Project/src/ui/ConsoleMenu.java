@@ -154,4 +154,13 @@ public class ConsoleMenu {
             }
         }
     }
+
+
+    //Listing sub-menus methods:
+    public void ListByCategoryMenu(){
+        System.out.println("Do you want to list your expenses by which Category?");
+        Category category = pickCategory();
+
+        service.ListByCategoryMenu(category);
+    }
 }
