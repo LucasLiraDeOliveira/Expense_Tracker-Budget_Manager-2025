@@ -45,4 +45,12 @@ public class ExpenseRepository {
                 .sorted(Comparator.comparing(Expense::getDate))
                 .toList();
     }
+
+    public List<Expense> findByMonth(int year, int month){
+        return expenseSet.stream()
+                .filter(e -> e.getDate().getYear() == year)
+                .filter(e -> e.getDate().getMonthValue() == month)
+                .sorted(Comparator.comparing(Expense::getDate))
+                .toList();
+    }
 }
