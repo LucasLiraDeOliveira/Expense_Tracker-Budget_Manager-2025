@@ -3,10 +3,7 @@ package repository;
 import model.Category;
 import model.Expense;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 public class ExpenseRepository {
     Set<Expense> expenseSet = new HashSet<>();
@@ -38,6 +35,14 @@ public class ExpenseRepository {
     public List<Expense> findByYear(int year){
         return expenseSet.stream()
                 .filter(e -> e.getDate().getYear() == year)
+                .toList();
+    }
+
+    public List<Expense> findBySemester(int year, int semesterBegin, int semesterEnd){
+        return expenseSet.stream()
+                .filter(e -> e.getDate().getYear() == year)
+                .filter(e -> e.getDate().getMonthValue() >= semesterBegin && e.getDate().getMonthValue() <= semesterEnd)
+                .sorted(Comparator.comparing(Expense::getDate))
                 .toList();
     }
 }
