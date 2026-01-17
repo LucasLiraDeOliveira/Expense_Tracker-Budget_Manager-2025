@@ -172,4 +172,36 @@ public class ConsoleMenu {
          List<Expense> expenseList = service.ListByCategory(category);
          expenseList.forEach(System.out::println);
     }
+
+    public void ListByTimeMenu(){
+        boolean validAnswer = true;
+        while (validAnswer){
+            System.out.println("Do you want to see the expenses of which year?");
+            int year = scanner.nextInt();
+
+            if (year > 2000 && year <= 2100){
+                System.out.println("Do you want to list the expenses of:\n1 - the whole year\n2 - an semester\m3 - An" +
+                        " specific month");
+                int dataChoice = scanner.nextInt();
+                switch (dataChoice){
+                    case 1:
+                        service.ListByTime(1, year);
+                        break;
+                    case 2:
+                        System.out.println("Which semester of " + year + " you want to choose?  (1  OR  2)");
+                        int semester = scanner.nextInt();
+                        service.ListByTime(2, semester);
+                        break;
+                    case 3:
+                        System.out.println("Which month of " + year + " you want to choose?  (1  TO  12)");
+                        int month = scanner.nextInt();
+                        service.ListByTime(3, month);
+                        break;
+
+                }
+            } else {
+                System.out.println("We're working with expenses at 21st century. Please put a valid value!");
+            }
+        }
+    }
 }
