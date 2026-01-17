@@ -180,24 +180,30 @@ public class ConsoleMenu {
             int year = readOption();
 
             if (year > 2000 && year <= 2100){
-                System.out.println("Do you want to list the expenses of:\n1 - the whole year\n2 - an semester\m3 - An" +
+                System.out.println("Do you want to list the expenses of:\n1 - the whole year\n2 - an semester\n3 - An" +
                         " specific month");
                 int dataChoice = readOption();
+
                 switch (dataChoice){
                     case 1:
-                        service.ListByTime(1, year, 0);
+                        System.out.println("\nAll expenses of " + year + ":");
+                        service.ListByTime(1, year, 0).forEach(System.out::println);
                         validAnswer = false;
                         break;
                     case 2:
                         System.out.println("Which semester of " + year + " you want to choose?  (1  OR  2)");
                         int semester = readOption();
-                        service.ListByTime(2, year, semester);
+
+                        System.out.println("\nAll expenses of semester " + semester + " of " + year + ":");
+                        service.ListByTime(2, year, semester).forEach(System.out::println);
                         validAnswer = false;
                         break;
                     case 3:
                         System.out.println("Which month of " + year + " you want to choose?  (1  TO  12)");
                         int month = readOption();
-                        service.ListByTime(3, year, month);
+
+                        System.out.println("\nAll expenses of month " + month + " of " + year + ":");
+                        service.ListByTime(3, year, month).forEach(System.out::println);
                         validAnswer = false;
                         break;
 
