@@ -34,4 +34,10 @@ public class ExpenseRepository {
                 .filter(e -> e.getCategory() == category)
                 .toList();
     }
+
+    public List<Expense> findByYear(int year){
+        return expenseSet.stream()
+                .filter(e -> e.getDate().getYear() == year)
+                .toList();
+    }
 }
