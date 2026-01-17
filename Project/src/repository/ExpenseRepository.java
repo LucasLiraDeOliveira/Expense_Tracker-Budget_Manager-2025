@@ -42,7 +42,6 @@ public class ExpenseRepository {
         return expenseSet.stream()
                 .filter(e -> e.getDate().getYear() == year)
                 .filter(e -> e.getDate().getMonthValue() >= semesterBegin && e.getDate().getMonthValue() <= semesterEnd)
-                .sorted(Comparator.comparing(Expense::getDate))
                 .toList();
     }
 
@@ -50,7 +49,6 @@ public class ExpenseRepository {
         return expenseSet.stream()
                 .filter(e -> e.getDate().getYear() == year)
                 .filter(e -> e.getDate().getMonthValue() == month)
-                .sorted(Comparator.comparing(Expense::getDate))
                 .toList();
     }
 }
