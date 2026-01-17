@@ -185,19 +185,19 @@ public class ConsoleMenu {
                 int dataChoice = readOption();
                 switch (dataChoice){
                     case 1:
-                        service.ListByTime(1, year);
+                        service.ListByTime(1, year, 0);
                         validAnswer = false;
                         break;
                     case 2:
                         System.out.println("Which semester of " + year + " you want to choose?  (1  OR  2)");
                         int semester = readOption();
-                        service.ListByTime(2, semester);
+                        service.ListByTime(2, year, semester);
                         validAnswer = false;
                         break;
                     case 3:
                         System.out.println("Which month of " + year + " you want to choose?  (1  TO  12)");
                         int month = readOption();
-                        service.ListByTime(3, month);
+                        service.ListByTime(3, year, month);
                         validAnswer = false;
                         break;
 
