@@ -37,4 +37,24 @@ public class ExpenseService {
     public List<Expense> ListByCategory(Category category){
         return repository.findByCategory(category);
     }
+
+
+    public List<Expense> ListByTime(int category, int year, int value){
+        switch (category){
+            case 1:
+                return repository.findByYear(year);
+                break;
+            case 2:
+                if (value == 1){
+                    return repository.findBySemester(year, 1, 6);
+                }
+                if (value == 2){
+                    return repository.findBySemester(year, 7, 12);
+                }
+                break;
+            case 3:
+                return repository.findByMonth(year, value);
+                break;
+        }
+    }
 }
