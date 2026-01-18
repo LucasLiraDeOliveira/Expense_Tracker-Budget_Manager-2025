@@ -206,7 +206,8 @@ public class ConsoleMenu {
                         service.ListByTime(3, year, month).forEach(System.out::println);
                         validAnswer = false;
                         break;
-
+                    default:
+                        throw new IllegalArgumentException("Invalid option: " + dataChoice);
                 }
             } else {
                 System.out.println("We're working with expenses at 21st century. Please put a valid value!");

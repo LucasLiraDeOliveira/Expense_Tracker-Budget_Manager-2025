@@ -46,7 +46,6 @@ public class ExpenseService {
                 return repository.findByYear(year).stream()
                         .sorted(Comparator.comparing(Expense::getDate))
                         .toList();
-                break;
             case 2:
                 if (value == 1){
                     return repository.findBySemester(year, 1, 6).stream()
@@ -58,12 +57,13 @@ public class ExpenseService {
                             .sorted(Comparator.comparing(Expense::getDate))
                             .toList();
                 }
-                break;
+                throw new IllegalArgumentException("Invalid semester value: " + value);
             case 3:
                 return repository.findByMonth(year, value).stream()
                         .sorted(Comparator.comparing(Expense::getDate))
                         .toList();
-                break;
+            default:
+                throw new IllegalArgumentException("Invalid category: " + category);
         }
     }
 }
