@@ -156,19 +156,40 @@ public class ConsoleMenu {
         boolean running = true;
 
         while (running){
+            int year = validationOfYear();
+
             System.out.println("Do you want to list your expenses by what:\n1- List by Category\n2 - List By time\n3 " +
                     "- List by amount range\n4 - List by payment method\nBack to main menu");
             int option = readOption();
 
             switch (option) {
                 case 1 -> ListByCategoryMenu();
-                case 2 -> ListByTimeMenu();
-                case 3 -> ListByAmountMenu();
-                case 4 -> ListByPaymentMethodMenu();
+                case 2 -> ListByTimeMenu(year);
+                case 3 -> ListByAmountMenu(year);
+                case 4 -> ListByPaymentMethodMenu(year);
                 case 0 -> running = false;
                 default -> System.out.println("Invalid option");
             }
         }
+    }
+
+
+    private int validationOfYear(){
+        boolean validYear = false;
+        int year = 0;
+
+        while (!validYear){
+            System.out.println("Do you want to see the expenses of which year?");
+            year = readOption();
+
+            if (year > 2000 && year <= 2100) {
+                validYear = true;
+            } else {
+                System.out.println("We're working with expenses at 21st century. Please put a valid value!");
+            }
+        }
+
+        return year;
     }
 
 
@@ -181,87 +202,50 @@ public class ConsoleMenu {
          expenseList.forEach(System.out::println);
     }
 
-    public void ListByTimeMenu(){
-        boolean validAnswer = true;
-        while (validAnswer){
-            System.out.println("Do you want to see the expenses of which year?");
-            int year = readOption();
+    public void ListByTimeMenu(int year){
+        System.out.println("Do you want to list the expenses of:\n1 - the whole year\n2 - an semester\n3 - An" +
+                " specific month");
+        int dataChoice = readOption();
 
-            if (year > 2000 && year <= 2100){
-                System.out.println("Do you want to list the expenses of:\n1 - the whole year\n2 - an semester\n3 - An" +
-                        " specific month");
-                int dataChoice = readOption();
+        switch (dataChoice){
+            case 1:
+                System.out.println("\nAll expenses of " + year + ":");
+                service.ListByTime(1, year, 0).forEach(System.out::println);
+                break;
+            case 2:
+                System.out.println("Which semester of " + year + " you want to choose?  (1  OR  2)");
+                int semester = readOption();
 
-                switch (dataChoice){
-                    case 1:
-                        System.out.println("\nAll expenses of " + year + ":");
-                        service.ListByTime(1, year, 0).forEach(System.out::println);
-                        validAnswer = false;
-                        break;
-                    case 2:
-                        System.out.println("Which semester of " + year + " you want to choose?  (1  OR  2)");
-                        int semester = readOption();
+                System.out.println("\nAll expenses of semester " + semester + " of " + year + ":");
+                service.ListByTime(2, year, semester).forEach(System.out::println);
+                break;
+            case 3:
+                System.out.println("Which month of " + year + " you want to choose?  (1  TO  12)");
+                int month = readOption();
 
-                        System.out.println("\nAll expenses of semester " + semester + " of " + year + ":");
-                        service.ListByTime(2, year, semester).forEach(System.out::println);
-                        validAnswer = false;
-                        break;
-                    case 3:
-                        System.out.println("Which month of " + year + " you want to choose?  (1  TO  12)");
-                        int month = readOption();
-
-                        System.out.println("\nAll expenses of month " + month + " of " + year + ":");
-                        service.ListByTime(3, year, month).forEach(System.out::println);
-                        validAnswer = false;
-                        break;
-                    default:
-                        throw new IllegalArgumentException("Invalid option: " + dataChoice);
-                }
-            } else {
-                System.out.println("We're working with expenses at 21st century. Please put a valid value!");
-            }
+                System.out.println("\nAll expenses of month " + month + " of " + year + ":");
+                service.ListByTime(3, year, month).forEach(System.out::println);
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid option: " + dataChoice);
         }
     }
 
-    public void ListByAmountMenu(){
-        boolean validAnswer = true;
+    public void ListByAmountMenu(int year){
+        System.out.println("What's the lower value of the amount range you want to list:");
+        BigDecimal lowerValue = new BigDecimal(scanner.nextLine());
+        System.out.println("What's the upper value of the amount range you want to list:");
+        BigDecimal upperValue = new BigDecimal(scanner.nextLine());
 
-        while (validAnswer){
-            System.out.println("Do you want to see the expenses of which year?");
-            int year = readOption();
-
-            if (year > 2000 && year <= 2100){
-                System.out.println("What's the lower value of the amount range you want to list:");
-                BigDecimal lowerValue = new BigDecimal(scanner.nextLine());
-                System.out.println("What's the upper value of the amount range you want to list:");
-                BigDecimal upperValue = new BigDecimal(scanner.nextLine());
-
-                System.out.println("All expenses between R$" + lowerValue + " and R$" + upperValue + " are:");
-                service.ListByAmount(year, lowerValue, upperValue).forEach(System.out::println);
-                validAnswer = false;
-            } else {
-                System.out.println("We're working with expenses at 21st century. Please put a valid value!");
-            }
-        }
+        System.out.println("All expenses between R$" + lowerValue + " and R$" + upperValue + " are:");
+        service.ListByAmount(year, lowerValue, upperValue).forEach(System.out::println);
     }
 
-    public void ListByPaymentMethodMenu(){
-        boolean validAnswer = true;
+    public void ListByPaymentMethodMenu(int year){
+        System.out.println("Do you want a list of expenses based on which Payment method:");
+        PaymentMethod paymentMethod = pickPaymentMethod();
 
-        while (validAnswer) {
-            System.out.println("Do you want to see the expenses of which year?");
-            int year = readOption();
-
-            if (year > 2000 && year <= 2100) {
-                System.out.println("Do you want a list of expenses based on which Payment method:");
-                PaymentMethod paymentMethod = pickPaymentMethod();
-
-                System.out.println("This are all the expenses that with " + paymentMethod + " in " + year + " :");
-                service.ListByPaymentMethod(year, paymentMethod).forEach(System.out::println);
-                validAnswer = false;
-            } else {
-                System.out.println("We're working with expenses at 21st century. Please put a valid value!");
-            }
-        }
+        System.out.println("This are all the expenses that with " + paymentMethod + " in " + year + " :");
+        service.ListByPaymentMethod(year, paymentMethod).forEach(System.out::println);
     }
 }
