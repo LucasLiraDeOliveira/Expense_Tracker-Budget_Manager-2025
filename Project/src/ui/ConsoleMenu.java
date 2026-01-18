@@ -250,4 +250,9 @@ public class ConsoleMenu {
         System.out.println("This are all the expenses that with " + paymentMethod + " in " + year + " :");
         service.ListByPaymentMethod(year, paymentMethod).forEach(System.out::println);
     }
+
+    public void ListAllExpensesMenu(int year){
+        System.out.println("This are all the expenses of " + year + " :");
+        service.ListAllExpenses(year).forEach(System.out::println);
+    }
 }
