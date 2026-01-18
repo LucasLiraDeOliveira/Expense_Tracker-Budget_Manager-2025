@@ -213,4 +213,26 @@ public class ConsoleMenu {
             }
         }
     }
+
+    public void ListByAmountMenu(){
+        boolean validAnswer = true;
+
+        while (validAnswer){
+            System.out.println("Do you want to see the expenses of which year?");
+            int year = readOption();
+
+            if (year > 2000 && year <= 2100){
+                System.out.println("What's the lower value of the amount range you want to list:");
+                BigDecimal lowerValue = new BigDecimal(scanner.nextLine());
+                System.out.println("What's the upper value of the amount range you want to list:");
+                BigDecimal upperValue = new BigDecimal(scanner.nextLine());
+
+                System.out.println("All expenses between R$" + lowerValue + " and R$" + upperValue + " are:");
+                service.ListByAmount(year, lowerValue, upperValue).forEach(System.out::println);
+                validAnswer = false;
+            } else {
+                System.out.println("We're working with expenses at 21st century. Please put a valid value!");
+            }
+        }
+    }
 }
