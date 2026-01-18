@@ -2,6 +2,7 @@ package service;
 
 import model.Category;
 import model.Expense;
+import model.PaymentMethod;
 import repository.ExpenseRepository;
 
 import java.math.BigDecimal;
@@ -71,6 +72,12 @@ public class ExpenseService {
     public  List<Expense> ListByAmount(int year, BigDecimal lowerValue, BigDecimal upperValue){
         return repository.findByAmount(year, lowerValue, upperValue).stream()
                 .sorted(Comparator.comparing(Expense::getAmount))
+                .toList();
+    }
+
+    public List<Expense> ListByPaymentMethod(int year, PaymentMethod paymentMethod){
+        return repository.findByPaymentMethod(year, paymentMethod).stream()
+                .sorted(Comparator.comparing(Expense::getPaymentMethod))
                 .toList();
     }
 }
