@@ -20,6 +20,7 @@ public class ExpenseService {
 
 
 
+
     public void addExpense(Expense expense){
         repository.add(expense);
     }
@@ -71,14 +72,23 @@ public class ExpenseService {
         }
     }
 
+
     public  List<Expense> ListByAmount(int year, BigDecimal lowerValue, BigDecimal upperValue){
         return repository.findByAmount(year, lowerValue, upperValue).stream()
                 .sorted(Comparator.comparing(Expense::getAmount))
                 .toList();
     }
 
+
     public List<Expense> ListByPaymentMethod(int year, PaymentMethod paymentMethod){
         return repository.findByPaymentMethod(year, paymentMethod).stream()
+                .sorted(Comparator.comparing(Expense::getPaymentMethod))
+                .toList();
+    }
+
+
+    public List<Expense> ListAllExpenses(int year){
+        return repository.findAll(year).stream()
                 .sorted(Comparator.comparing(Expense::getPaymentMethod))
                 .toList();
     }
