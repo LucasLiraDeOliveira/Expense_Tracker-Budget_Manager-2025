@@ -69,20 +69,9 @@ public class ConsoleMenu {
 
         // Payment Method attribute part:
         scanner.nextLine(); // clear leftover newline
-        PaymentMethod paymentMethod = null;
+        System.out.println("How did you pay?");
+        PaymentMethod paymentMethod = pickPaymentMethod();
 
-        while (paymentMethod == null) {
-            System.out.print("How did you pay? \nThe possibilities are:\nCREDIT,\nDEBIT,\nCASH,\nPIX");
-            String input = scanner.nextLine().trim();
-
-            if (input.isEmpty()) continue;
-
-            try {
-                paymentMethod = PaymentMethod.valueOf(input.toUpperCase());
-            } catch (IllegalArgumentException e) {
-                System.out.println("Invalid priority. Try again.\n");
-            }
-        }
 
 
         System.out.println("\nWhen the Expense was made?");
@@ -127,6 +116,25 @@ public class ConsoleMenu {
             }
         }
         return category;
+    }
+
+
+    private PaymentMethod pickPaymentMethod(){
+        PaymentMethod paymentMethod = null;
+
+        while (paymentMethod == null) {
+            System.out.print("The possibilities are:\nCREDIT,\nDEBIT,\nCASH,\nPIX");
+            String input = scanner.nextLine().trim();
+
+            if (input.isEmpty()) continue;
+
+            try {
+                paymentMethod = PaymentMethod.valueOf(input.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid priority. Try again.\n");
+            }
+        }
+        return paymentMethod;
     }
 
 
@@ -245,20 +253,8 @@ public class ConsoleMenu {
             int year = readOption();
 
             if (year > 2000 && year <= 2100) {
-                PaymentMethod paymentMethod = null;
-
-                while (paymentMethod == null) {
-                    System.out.print("How did you pay? \nThe possibilities are:\nCREDIT,\nDEBIT,\nCASH,\nPIX");
-                    String input = scanner.nextLine().trim();
-
-                    if (input.isEmpty()) continue;
-
-                    try {
-                        paymentMethod = PaymentMethod.valueOf(input.toUpperCase());
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Invalid priority. Try again.\n");
-                    }
-                }
+                System.out.println("Do you want a list of expenses based on which Payment method:");
+                PaymentMethod paymentMethod = pickPaymentMethod();
 
                 System.out.println("This are all the expenses that with " + paymentMethod + " in " + year + " :");
                 service.ListByPaymentMethod(year, paymentMethod).forEach(System.out::println);
