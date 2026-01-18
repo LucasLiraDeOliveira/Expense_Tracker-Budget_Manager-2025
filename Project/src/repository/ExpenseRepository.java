@@ -2,6 +2,7 @@ package repository;
 
 import model.Category;
 import model.Expense;
+import model.PaymentMethod;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -57,6 +58,13 @@ public class ExpenseRepository {
         return expenseSet.stream()
                 .filter(e -> e.getDate().getYear() == year)
                 .filter(e -> e.getAmount().compareTo(lowerValue) >= 0 && e.getAmount().compareTo(upperValue) <= 0)
+                .toList();
+    }
+
+    public List<Expense> findByPaymentMethod(int year, PaymentMethod paymentMethod){
+        return expenseSet.stream()
+                .filter(e -> e.getDate().getYear() == year)
+                .filter(e -> e.getPaymentMethod() == paymentMethod)
                 .toList();
     }
 }
