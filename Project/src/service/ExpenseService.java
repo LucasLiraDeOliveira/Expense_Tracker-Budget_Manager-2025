@@ -4,6 +4,7 @@ import model.Category;
 import model.Expense;
 import repository.ExpenseRepository;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.List;
@@ -65,5 +66,11 @@ public class ExpenseService {
             default:
                 throw new IllegalArgumentException("Invalid category: " + category);
         }
+    }
+
+    public  List<Expense> ListByAmount(int year, BigDecimal lowerValue, BigDecimal upperValue){
+        return repository.findByAmount(year, lowerValue, upperValue).stream()
+                .sorted(Comparator.comparing(Expense::getAmount))
+                .toList();
     }
 }
