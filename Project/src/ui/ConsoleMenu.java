@@ -236,4 +236,36 @@ public class ConsoleMenu {
             }
         }
     }
+
+    public void ListByPaymentMethodMenu(){
+        boolean validAnswer = true;
+
+        while (validAnswer) {
+            System.out.println("Do you want to see the expenses of which year?");
+            int year = readOption();
+
+            if (year > 2000 && year <= 2100) {
+                PaymentMethod paymentMethod = null;
+
+                while (paymentMethod == null) {
+                    System.out.print("How did you pay? \nThe possibilities are:\nCREDIT,\nDEBIT,\nCASH,\nPIX");
+                    String input = scanner.nextLine().trim();
+
+                    if (input.isEmpty()) continue;
+
+                    try {
+                        paymentMethod = PaymentMethod.valueOf(input.toUpperCase());
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Invalid priority. Try again.\n");
+                    }
+                }
+
+                System.out.println("This are all the expenses that with " + paymentMethod + " in " + year + " :");
+                service.ListByPaymentMethod(year, paymentMethod).forEach(System.out::println);
+                validAnswer = false;
+            } else {
+                System.out.println("We're working with expenses at 21st century. Please put a valid value!");
+            }
+        }
+    }
 }
