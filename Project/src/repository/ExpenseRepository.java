@@ -28,8 +28,9 @@ public class ExpenseRepository {
         return List.copyOf(expenseSet);
     }
 
-    public List<Expense> findByCategory(Category category){
+    public List<Expense> findByCategory(int year, Category category){
         return expenseSet.stream()
+                .filter(e -> e.getDate().getYear() == year)
                 .filter(e -> e.getCategory() == category)
                 .toList();
     }

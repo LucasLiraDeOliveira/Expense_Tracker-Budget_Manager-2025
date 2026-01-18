@@ -163,7 +163,7 @@ public class ConsoleMenu {
             int option = readOption();
 
             switch (option) {
-                case 1 -> ListByCategoryMenu();
+                case 1 -> ListByCategoryMenu(year);
                 case 2 -> ListByTimeMenu(year);
                 case 3 -> ListByAmountMenu(year);
                 case 4 -> ListByPaymentMethodMenu(year);
@@ -194,11 +194,11 @@ public class ConsoleMenu {
 
 
     //Listing sub-menus methods:
-    public void ListByCategoryMenu(){
+    public void ListByCategoryMenu(int year){
         System.out.println("Do you want to list your expenses by which Category?");
         Category category = pickCategory();
 
-         List<Expense> expenseList = service.ListByCategory(category);
+         List<Expense> expenseList = service.ListByCategory(year, category);
          expenseList.forEach(System.out::println);
     }
 

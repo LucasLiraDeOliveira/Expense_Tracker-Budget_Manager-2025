@@ -37,8 +37,10 @@ public class ExpenseService {
     }
 
 
-    public List<Expense> ListByCategory(Category category){
-        return repository.findByCategory(category);
+    public List<Expense> ListByCategory(int year, Category category){
+        return repository.findByCategory(year, category).stream()
+                .sorted(Comparator.comparing(Expense::getCategory))
+                .toList();
     }
 
 
