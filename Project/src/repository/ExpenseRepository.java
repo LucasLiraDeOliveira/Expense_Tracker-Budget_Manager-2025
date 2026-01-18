@@ -24,10 +24,6 @@ public class ExpenseRepository {
                 .findFirst();
     }
 
-    public List<Expense> findAll(){
-        return List.copyOf(expenseSet);
-    }
-
     public List<Expense> findByCategory(int year, Category category){
         return expenseSet.stream()
                 .filter(e -> e.getDate().getYear() == year)
@@ -66,6 +62,12 @@ public class ExpenseRepository {
         return expenseSet.stream()
                 .filter(e -> e.getDate().getYear() == year)
                 .filter(e -> e.getPaymentMethod() == paymentMethod)
+                .toList();
+    }
+
+    public List<Expense> findAll(int year){
+        return expenseSet.stream()
+                .filter(e -> e.getDate().getYear() == year)
                 .toList();
     }
 }
