@@ -3,6 +3,7 @@ package repository;
 import model.Category;
 import model.Expense;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 public class ExpenseRepository {
@@ -49,6 +50,13 @@ public class ExpenseRepository {
         return expenseSet.stream()
                 .filter(e -> e.getDate().getYear() == year)
                 .filter(e -> e.getDate().getMonthValue() == month)
+                .toList();
+    }
+
+    public List<Expense> findByAmount(int year, BigDecimal lowerValue, BigDecimal upperValue){
+        return expenseSet.stream()
+                .filter(e -> e.getDate().getYear() == year)
+                .filter(e -> e.getAmount().compareTo(lowerValue) >= 0 && e.getAmount().compareTo(upperValue) <= 0)
                 .toList();
     }
 }
