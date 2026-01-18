@@ -159,7 +159,8 @@ public class ConsoleMenu {
             int year = validationOfYear();
 
             System.out.println("Do you want to list your expenses by what:\n1- List by Category\n2 - List By time\n3 " +
-                    "- List by amount range\n4 - List by payment method\nBack to main menu");
+                    "- List by amount range\n4 - List by payment method\n5 - List all expenses of a year\nBack to " +
+                    "main menu");
             int option = readOption();
 
             switch (option) {
@@ -167,6 +168,7 @@ public class ConsoleMenu {
                 case 2 -> ListByTimeMenu(year);
                 case 3 -> ListByAmountMenu(year);
                 case 4 -> ListByPaymentMethodMenu(year);
+                case 5 -> ListAllExpensesMenu(year);
                 case 0 -> running = false;
                 default -> System.out.println("Invalid option");
             }
