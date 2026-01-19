@@ -22,13 +22,19 @@ public class ConsoleMenu {
     public void start(){
         boolean running = true;
 
+        System.out.println("Do you want to add some expenses examples to manipulate the app a little? [YES - NO]");
+        if (scanner.next().equalsIgnoreCase("yes")){
+            preFillList();
+            System.out.println("Pre-filling 15 example tasks into the List!");
+        } else {
+            System.out.println("Okok! List of Tasks starting empty");
+        }
 
         while (running){
             System.out.println("\n\n--- Expense Tracker / Budget Manager ---");
             System.out.println("1 - Add an Expense\n2 - Remove an Expense\n3 - Listing Expenses\n4 - Analysing " +
                     "Expenses\n0 - To exit the APP");
             int option = readOption();
-
 
             switch (option) {
                 case 1 -> AddExpense();
