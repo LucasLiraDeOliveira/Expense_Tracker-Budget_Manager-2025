@@ -225,8 +225,8 @@ public class ConsoleMenu {
             int year = validationOfYear();
 
             System.out.println("Do you want to list your expenses by what:\n1- List by Category\n2 - List By time\n3 " +
-                    "- List by amount range\n4 - List by payment method\n5 - List all expenses of a year\nBack to " +
-                    "main menu");
+                    "- List by amount range\n4 - List by payment method\n5 - List all expenses of a year\n0 - Back to" +
+                    " main menu");
             int option = readOption();
 
             switch (option) {
