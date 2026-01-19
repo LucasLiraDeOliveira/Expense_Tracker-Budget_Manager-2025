@@ -25,7 +25,7 @@ public class ConsoleMenu {
         System.out.println("Do you want to add some expenses examples to manipulate the app a little? [YES - NO]");
         if (scanner.next().equalsIgnoreCase("yes")){
             preFillList();
-            System.out.println("Pre-filling 15 example tasks into the List!");
+            System.out.println("Pre-filling 24 example tasks into the List!");
         } else {
             System.out.println("Okok! List of Tasks starting empty");
         }
@@ -45,6 +45,66 @@ public class ConsoleMenu {
                 default -> System.out.println("Invalid option");
             }
         }
+    }
+
+
+
+    public void preFillList() {
+        // Transport examples:
+        service.addExpense(new Expense(new BigDecimal("120.0"), "interstate bus ticket", Category.TRANSPORT,
+                PaymentMethod.CREDIT, LocalDate.of(2024, 2, 17)));
+        service.addExpense(new Expense(new BigDecimal("100.0"), "Gas for the week", Category.TRANSPORT,
+                PaymentMethod.CREDIT, LocalDate.of(2024, 4, 13)));
+        service.addExpense(new Expense(new BigDecimal("20.0"), "weekly bus transportation to work", Category.TRANSPORT,
+                PaymentMethod.PIX, LocalDate.of(2024, 1, 3)));
+        service.addExpense(new Expense(new BigDecimal("20.0"), "weekly bus transportation to work", Category.TRANSPORT,
+                PaymentMethod.CASH, LocalDate.of(2024, 7, 9)));
+        service.addExpense(new Expense(new BigDecimal("20.0"), "weekly bus transportation to work", Category.TRANSPORT,
+                PaymentMethod.DEBIT, LocalDate.of(2024, 9, 7)));
+        service.addExpense(new Expense(new BigDecimal("22.5"), "weekly bus transportation to work", Category.TRANSPORT,
+                PaymentMethod.PIX, LocalDate.of(2025, 1, 7)));
+
+        //Food examples:
+        service.addExpense(new Expense(new BigDecimal("250.0"), "Diner with family at Fogo de Chão", Category.FOOD,
+                PaymentMethod.CREDIT, LocalDate.of(2024, 2, 14)));
+        service.addExpense(new Expense(new BigDecimal("124.8"), "weekly groceries", Category.FOOD,
+                PaymentMethod.PIX, LocalDate.of(2024, 3, 3)));
+        service.addExpense(new Expense(new BigDecimal("144.6"), "weekly groceries", Category.FOOD,
+                PaymentMethod.CREDIT, LocalDate.of(2024, 4, 20)));
+        service.addExpense(new Expense(new BigDecimal("104.2"), "weekly groceries", Category.FOOD,
+                PaymentMethod.DEBIT, LocalDate.of(2024, 8, 15)));
+        service.addExpense(new Expense(new BigDecimal("154.0"), "weekly groceries", Category.FOOD,
+                PaymentMethod.PIX, LocalDate.of(2025, 1, 2)));
+        service.addExpense(new Expense(new BigDecimal("33.8"), "uber eats midnight snack", Category.FOOD,
+                PaymentMethod.PIX, LocalDate.of(2024, 11, 12)));
+
+        // Housing examples:
+        service.addExpense(new Expense(new BigDecimal("220.5"), "House rent", Category.HOUSING,
+                PaymentMethod.CREDIT, LocalDate.of(2024, 1, 3)));
+        service.addExpense(new Expense(new BigDecimal("220.5"), "House rent", Category.HOUSING,
+                PaymentMethod.CREDIT, LocalDate.of(2024, 3, 3)));
+        service.addExpense(new Expense(new BigDecimal("252.5"), "House rent", Category.HOUSING,
+                PaymentMethod.CREDIT, LocalDate.of(2025, 1, 3)));
+        service.addExpense(new Expense(new BigDecimal("80.5"), "Fixing the kitchen sink", Category.HOUSING,
+                PaymentMethod.CREDIT, LocalDate.of(2024, 2, 26)));
+
+        // Other examples:
+        service.addExpense(new Expense(new BigDecimal("475.7"), "car crash", Category.EMERGENCY,
+                PaymentMethod.CREDIT, LocalDate.of(2024, 7, 7)));
+        service.addExpense(new Expense(new BigDecimal("55.3"), "Kid's medicine", Category.HEALTH,
+                PaymentMethod.CREDIT, LocalDate.of(2024, 9, 17)));
+        service.addExpense(new Expense(new BigDecimal("85.0"), "Gym membership", Category.HEALTH,
+                PaymentMethod.CREDIT, LocalDate.of(2024, 1, 14)));
+        service.addExpense(new Expense(new BigDecimal("255.0"), "acquired a Java Course", Category.EDUCATION,
+                PaymentMethod.CREDIT, LocalDate.of(2024, 3, 12)));
+        service.addExpense(new Expense(new BigDecimal("125.7"), "Date with a friend", Category.ENTERTAINMENT,
+                PaymentMethod.CREDIT, LocalDate.of(2024, 11, 24)));
+        service.addExpense(new Expense(new BigDecimal("45.4"), "Brought new Levi's trouser", Category.SHOPPING,
+                PaymentMethod.CREDIT, LocalDate.of(2024, 4, 5)));
+        service.addExpense(new Expense(new BigDecimal("475.7"), "Brought my first america's Treasury bill",
+                Category.INVESTMENTS,PaymentMethod.DEBIT, LocalDate.of(2025, 8, 11)));
+        service.addExpense(new Expense(new BigDecimal("475.7"), "first step into building my money emercency reserve",
+                Category.INVESTMENTS, PaymentMethod.PIX, LocalDate.of(2025, 8, 11)));
     }
 
 
