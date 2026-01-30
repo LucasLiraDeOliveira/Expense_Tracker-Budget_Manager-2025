@@ -5,8 +5,10 @@ import model.Expense;
 import model.PaymentMethod;
 import service.ExpenseService;
 
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -339,14 +341,14 @@ public class ConsoleMenu {
                 hasYear = true;
             }
 
-            System.out.println("\nDo you want to look into your expenses based on:\n1- A parameter that spent the " +
-                    "most/the least\n2 - The somatory that some parameter\n3 - Average amount of expenses\n4 - Change " +
-                    "the year of the analysis\n0 - Back to main menu");
+            System.out.println("\nDo you want to look into your expenses based on:\n1- The somatory that some parameter" +
+                    "\n2 - A parameter that spent the most/the least\n3 - Average amount of expenses of a parameter\n4 " +
+                    "- Change the year of the analysis\n0 - Back to main menu");
             int option = readOption();
 
             switch (option) {
-                case 1 -> AnalyseByMostAndLeastMenu(year);
-                case 2 -> AnalyseBySomatoryMenu(year);
+                case 1 -> AnalyseBySomatoryMenu(year);
+                case 2 -> AnalyseByMostAndLeastMenu(year);
                 case 3 -> AnalyseByAverageMenu(year);
                 case 4 -> hasYear = false;
                 case 0 -> running = false;
