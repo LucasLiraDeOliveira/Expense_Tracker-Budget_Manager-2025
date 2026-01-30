@@ -218,13 +218,18 @@ public class ConsoleMenu {
 
     private void ListingExpenseMenu(){
         boolean running = true;
+        boolean hasYear = false;
+        int year = 0;
 
         while (running){
-            int year = validationOfYear();
+            if (!hasYear){
+                validationOfYear();
+                hasYear = true;
+            }
 
             System.out.println("\nDo you want to list your expenses by what:\n1- List by Category\n2 - List By time\n3 " +
-                    "- List by amount range\n4 - List by payment method\n5 - List all expenses of a year\n0 - Back to" +
-                    " main menu");
+                    "- List by amount range\n4 - List by payment method\n5 - List all expenses of a year\n6 - Change " +
+                    "the year of the analysis\n0 - Back to main menu");
             int option = readOption();
 
             switch (option) {
@@ -233,6 +238,7 @@ public class ConsoleMenu {
                 case 3 -> ListByAmountMenu(year);
                 case 4 -> ListByPaymentMethodMenu(year);
                 case 5 -> ListAllExpensesMenu(year);
+                case 6 -> hasYear = false;
                 case 0 -> running = false;
                 default -> System.out.println("Invalid option");
             }
@@ -325,9 +331,9 @@ public class ConsoleMenu {
     private void AnalysingExpenseMenu(){
         boolean running = true;
         boolean hasYear = false;
+        int year = 0;
 
         while (running){
-            int year = 0;
             if (!hasYear){
                 validationOfYear();
                 hasYear = true;
