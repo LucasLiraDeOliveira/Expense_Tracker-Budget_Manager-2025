@@ -49,7 +49,7 @@ public class ConsoleMenu {
 
 
 
-    public void preFillList() {
+    private void preFillList() {
         // Transport examples:
         service.addExpense(new Expense(new BigDecimal("120.0"), "interstate bus ticket", Category.TRANSPORT,
                 PaymentMethod.CREDIT, LocalDate.of(2024, 2, 17)));
@@ -216,14 +216,14 @@ public class ConsoleMenu {
     }
 
 
-    private void ListingExpenseMenu(){
+    public void ListingExpenseMenu(){
         boolean running = true;
         boolean hasYear = false;
         int year = 0;
 
         while (running){
             if (!hasYear){
-                validationOfYear();
+                year = validationOfYear();
                 hasYear = true;
             }
 
@@ -267,7 +267,7 @@ public class ConsoleMenu {
 
 
     //Listing sub-menus methods:
-    public void ListByCategoryMenu(int year){
+    private void ListByCategoryMenu(int year){
         System.out.println("\nDo you want to list your expenses by which Category?");
         Category category = pickCategory();
 
@@ -275,7 +275,7 @@ public class ConsoleMenu {
          expenseList.forEach(System.out::println);
     }
 
-    public void ListByTimeMenu(int year){
+    private void ListByTimeMenu(int year){
         System.out.println("\nDo you want to list the expenses of:\n1 - the whole year\n2 - an semester\n3 - An" +
                 " specific month");
         int dataChoice = readOption();
@@ -304,7 +304,7 @@ public class ConsoleMenu {
         }
     }
 
-    public void ListByAmountMenu(int year){
+    private void ListByAmountMenu(int year){
         System.out.println("\nWhat's the lower value of the amount range you want to list:");
         BigDecimal lowerValue = new BigDecimal(scanner.nextLine());
         System.out.println("What's the upper value of the amount range you want to list:");
@@ -314,7 +314,7 @@ public class ConsoleMenu {
         service.ListByAmount(year, lowerValue, upperValue).forEach(System.out::println);
     }
 
-    public void ListByPaymentMethodMenu(int year){
+    private void ListByPaymentMethodMenu(int year){
         System.out.println("\nDo you want a list of expenses based on which Payment method:");
         PaymentMethod paymentMethod = pickPaymentMethod();
 
@@ -322,7 +322,7 @@ public class ConsoleMenu {
         service.ListByPaymentMethod(year, paymentMethod).forEach(System.out::println);
     }
 
-    public void ListAllExpensesMenu(int year){
+    private void ListAllExpensesMenu(int year){
         System.out.println("\nThis are all the expenses of " + year + " :");
         service.ListAllExpenses(year).forEach(System.out::println);
     }
@@ -335,7 +335,7 @@ public class ConsoleMenu {
 
         while (running){
             if (!hasYear){
-                validationOfYear();
+                year = validationOfYear();
                 hasYear = true;
             }
 
