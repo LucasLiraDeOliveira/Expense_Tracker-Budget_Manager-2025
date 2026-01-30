@@ -40,7 +40,7 @@ public class ConsoleMenu {
                 case 1 -> AddExpense();
                 case 2 -> RemoveExpense();
                 case 3 -> ListingExpenseMenu();
-                case 4 -> AnalysingExpense();
+                case 4 -> AnalysingExpenseMenu();
                 case 0 -> running = false;
                 default -> System.out.println("Invalid option");
             }
@@ -319,5 +319,33 @@ public class ConsoleMenu {
     public void ListAllExpensesMenu(int year){
         System.out.println("\nThis are all the expenses of " + year + " :");
         service.ListAllExpenses(year).forEach(System.out::println);
+    }
+
+
+    private void AnalysingExpenseMenu(){
+        boolean running = true;
+        boolean hasYear = false;
+
+        while (running){
+            int year = 0;
+            if (!hasYear){
+                validationOfYear();
+                hasYear = true;
+            }
+
+            System.out.println("\nDo you want to look into your expenses based on:\n1- A parameter that spent the " +
+                    "most/the least\n2 - The somatory that some parameter\n3 - Average amount of expenses\n4 - Change " +
+                    "the year of the analysis\n0 - Back to main menu");
+            int option = readOption();
+
+            switch (option) {
+                case 1 -> AnalyseByMostAndLeastMenu(year);
+                case 2 -> AnalyseBySomatoryMenu(year);
+                case 3 -> AnalyseByAverageMenu(year);
+                case 4 -> hasYear = false;
+                case 0 -> running = false;
+                default -> System.out.println("Invalid option");
+            }
+        }
     }
 }
