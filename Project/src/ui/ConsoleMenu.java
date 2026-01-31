@@ -341,9 +341,9 @@ public class ConsoleMenu {
                 hasYear = true;
             }
 
-            System.out.println("\nDo you want to look into your expenses based on:\n1- The somatory that some parameter" +
-                    "\n2 - A parameter that spent the most/the least\n3 - Average amount of expenses of a parameter\n4 " +
-                    "- Change the year of the analysis\n0 - Back to main menu");
+            System.out.println("\nDo you want to look into your expenses based on:\n1- The somatory of some parameter" +
+                    "\n2 - A parameter that spent the most/the least\n3 - Average amount spent on expenses of a " +
+                    "parameter\n4 - Change the year of the analysis\n0 - Back to main menu");
             int option = readOption();
 
             switch (option) {
