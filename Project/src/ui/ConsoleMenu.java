@@ -356,4 +356,88 @@ public class ConsoleMenu {
             }
         }
     }
+
+    //Analysing sub-menus methods:
+    private void AnalyseBySomatoryMenu(int year){
+        boolean validatingNumber = false;
+        int dataChoice = 0;
+        BigDecimal totalAmount;
+        Category categoryPicked;
+
+
+        while (!validatingNumber){
+            System.out.println("Do you want to analyze the total amount spent:\n1 - In a specific month\n2 - In the " +
+                    "year\n3 - In a specific category\n4 - With a specific payment method");
+            dataChoice = readOption();
+
+            if (dataChoice == 1 || dataChoice == 2 || dataChoice == 3 || dataChoice == 4) {
+                validatingNumber = true;
+            }
+        }
+        validatingNumber = false;
+
+        switch (dataChoice){
+            case 1:
+                while (!validatingNumber) {
+                    System.out.println("Which month of " + year + " you want to choose?  (1  TO  12)");
+                    dataChoice = readOption();
+
+                    if (dataChoice >= 1 && dataChoice <= 12){
+                        totalAmount = service.totalAmountOfMonth(year, dataChoice);
+
+                        if (totalAmount.compareTo(new BigDecimal("0.00")) == 0){
+                            System.out.println("In " + year + ", it doesn't have any expense on this month");
+                            continue;
+                        }
+
+                        switch (dataChoice){
+                            case 1:
+                                System.out.println("The total amount spent on the 1st month of " + year + " was R$" +
+                                        totalAmount);
+                                break;
+                            case 2:
+                                System.out.println("The total amount spent on the 2nd month of " + year + " was R$" +
+                                        totalAmount);
+                                break;
+                            case 3:
+                                System.out.println("The total amount spent on the 3rd month of " + year + " was R$" +
+                                        totalAmount);
+                                break;
+                            case 4:
+                                System.out.println("The total amount spent on the " + dataChoice + "th month was R$" +
+                                totalAmount);
+                                break;
+                        }
+
+                        validatingNumber = true;
+                    }
+                }
+                break;
+            case 2:
+                totalAmount = service.totalAmountOfYear(year);
+
+                System.out.println("The total amount spent on the year of" + year + " was R$" + totalAmount);
+                break;
+            case 3:
+                System.out.println("\nDo you want to calculate the amount spent in which Category?");
+                categoryPicked = pickCategory();
+
+                totalAmount = service.totalAmountOfCategory(year, categoryPicked);
+
+                System.out.println("The total amount spent on the year of" + year + " on " + categoryPicked + " was R$" + totalAmount);
+                break;
+            case 4:
+                System.out.println("\nDo you want to calculate the amount paid by which Payment method:");
+                PaymentMethod paymentMethod = pickPaymentMethod();
+
+                totalAmount = service.totalAmountOfPaymentMethod(year, paymentMethod);
+
+                System.out.println("The total amount spent on the year of" + year + " with " + paymentMethod + " was " +
+                        "R$" + totalAmount);
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid option: " + dataChoice);
+        }
+    }
+
 }
