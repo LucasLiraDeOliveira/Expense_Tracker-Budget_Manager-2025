@@ -514,7 +514,7 @@ public class ConsoleMenu {
                         " was " + mostLeastCategory);
                 break;
             case 3:
-                mostLeastPaymentMethod = service.mostLeastPaymentMethod(mostLeastChoice, dataChoice);
+                mostLeastPaymentMethod = service.mostLeastPaymentMethod(year, mostLeastChoice);
 
                 System.out.println("In the year of " + year + ", the payment method used " + mostLeastWord[0] + " was " +
                         mostLeastPaymentMethod);
