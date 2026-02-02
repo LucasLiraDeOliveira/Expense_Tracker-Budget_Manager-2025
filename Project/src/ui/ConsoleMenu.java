@@ -516,8 +516,8 @@ public class ConsoleMenu {
             case 3:
                 mostLeastPaymentMethod = service.mostLeastPaymentMethod(year, mostLeastChoice);
 
-                System.out.println("In the year of " + year + ", the payment method used " + mostLeastWord[0] + " was " +
-                        mostLeastPaymentMethod);
+                System.out.println("In the year of " + year + ", the payment method that you spent " + mostLeastWord[0] +
+                        " money was " + mostLeastPaymentMethod);
                 break;
             default:
                 throw new IllegalArgumentException("Invalid option: " + dataChoice);
