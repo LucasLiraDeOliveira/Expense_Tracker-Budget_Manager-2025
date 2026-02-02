@@ -363,6 +363,7 @@ public class ConsoleMenu {
         int dataChoice = 0;
         BigDecimal totalAmount;
         Category categoryPicked;
+        PaymentMethod paymentMethod;
 
 
         while (!validatingNumber){
@@ -428,7 +429,7 @@ public class ConsoleMenu {
                 break;
             case 4:
                 System.out.println("\nDo you want to calculate the amount paid by which Payment method:");
-                PaymentMethod paymentMethod = pickPaymentMethod();
+                paymentMethod = pickPaymentMethod();
 
                 totalAmount = service.totalAmountOfPaymentMethod(year, paymentMethod);
 
