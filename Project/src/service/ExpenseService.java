@@ -237,4 +237,12 @@ public class ExpenseService {
 
         return amountSpent.divide(divisor);
     }
+
+    public BigDecimal averageAmountOfCategory(int year, Category category){
+        int numberOfExpenditure = repository.findByCategory(year, category).size();
+        BigDecimal amountSpent = totalAmountOfCategory(year, category);
+        BigDecimal divisor = new BigDecimal(numberOfExpenditure);
+
+        return amountSpent.divide(divisor);
+    }
 }
