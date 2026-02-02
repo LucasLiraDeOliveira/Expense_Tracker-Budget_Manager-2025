@@ -221,4 +221,12 @@ public class ExpenseService {
 
         return currentPaymentMethod;
     }
+
+    public BigDecimal averageAmountOfMonth(int year, int month){
+        int numberOfExpenditure = repository.findByMonth(year, month).size();
+        BigDecimal amountSpent = totalAmountOfMonth(year, month);
+        BigDecimal divisor = new BigDecimal(numberOfExpenditure);
+
+        return amountSpent.divide(divisor);
+    }
 }
