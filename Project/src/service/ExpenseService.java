@@ -153,4 +153,38 @@ public class ExpenseService {
 
         return chosenMonth;
     }
+
+    public Category mostLeastCategory(int year, int mostLeastChoice){
+        int enumSize = 9;
+        BigDecimal currentMonth;
+        BigDecimal bestValue = null;
+        Category currentCategory = null;
+        boolean firstValue = true;
+
+        for (Category category : Category.values()){
+            currentMonth = totalAmountOfCategory(year, category);
+
+            if (currentMonth.compareTo(BigDecimal.ZERO) <= 0){
+                continue; // To ignore values like zero or negative ones
+            }
+
+            if (bestValue == null){
+                bestValue = currentMonth;
+                currentCategory = category;
+                continue;
+            }
+
+
+            if (mostLeastChoice == 1 && bestValue.compareTo(currentMonth) < 0){
+                bestValue = currentMonth;
+                currentCategory = category;
+            }
+            if (mostLeastChoice == 2 && bestValue.compareTo(currentMonth) > 0){
+                bestValue = currentMonth;
+                currentCategory = category;
+            }
+        }
+
+        return currentCategory;
+    }
 }
