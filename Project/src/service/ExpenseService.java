@@ -122,33 +122,32 @@ public class ExpenseService {
     }
 
     public int mostLeastMonth(int year, int mostLeastChoice){
-        BigDecimal[] mostLeast = new BigDecimal[12];
-        Arrays.fill(mostLeast, BigDecimal.ZERO);
-        BigDecimal auxMonth = BigDecimal.ZERO;
+        BigDecimal currentMonth;
+        BigDecimal bestValue = null;
         int chosenMonth = 0;
         boolean firstValue = true;
 
-        for (int i = 0; i < mostLeast.length; i++) {
-            mostLeast[i] = totalAmountOfMonth(year, i+1);
+        for (int month = 1; month <= 12; month++) {
+            currentMonth = totalAmountOfMonth(year, month);
 
-            if (mostLeastChoice == 1){
-                if (auxMonth.compareTo(mostLeast[i]) < 0 && mostLeast[i].compareTo(BigDecimal.ZERO) > 0){
-                    auxMonth = mostLeast[i];
-                    chosenMonth = i+1;
-                }
-            } else if (mostLeastChoice == 2){
-                if (firstValue){
-                    if (mostLeast[i].compareTo(BigDecimal.ZERO) > 0){
-                        auxMonth = mostLeast[i];
-                        chosenMonth = i+1;
-                        firstValue = false;
-                    }
-                } else {
-                    if (auxMonth.compareTo(mostLeast[i]) > 0 && mostLeast[i].compareTo(BigDecimal.ZERO) > 0){
-                        auxMonth = mostLeast[i];
-                        chosenMonth = i + 1;
-                    }
-                }
+            if (currentMonth.compareTo(BigDecimal.ZERO) <= 0){
+                continue; // To ignore values like zero or negative ones
+            }
+
+            if (bestValue == null){
+                bestValue = currentMonth;
+                chosenMonth = month;
+                continue;
+            }
+
+
+            if (mostLeastChoice == 1 && bestValue.compareTo(currentMonth) < 0){
+                bestValue = currentMonth;
+                chosenMonth = month;
+            }
+            if (mostLeastChoice == 2 && bestValue.compareTo(currentMonth) > 0){
+                bestValue = currentMonth;
+                chosenMonth = month;
             }
         }
 
