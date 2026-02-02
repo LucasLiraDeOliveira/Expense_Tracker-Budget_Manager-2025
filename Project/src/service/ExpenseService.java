@@ -38,12 +38,13 @@ public class ExpenseService {
     }
 
 
+
+    // Listing methods:
     public List<Expense> ListByCategory(int year, Category category){
         return repository.findByCategory(year, category).stream()
                 .sorted(Comparator.comparing(Expense::getCategory))
                 .toList();
     }
-
 
     public List<Expense> ListByTime(int category, int year, int value){
         switch (category){
@@ -72,20 +73,17 @@ public class ExpenseService {
         }
     }
 
-
     public  List<Expense> ListByAmount(int year, BigDecimal lowerValue, BigDecimal upperValue){
         return repository.findByAmount(year, lowerValue, upperValue).stream()
                 .sorted(Comparator.comparing(Expense::getAmount))
                 .toList();
     }
 
-
     public List<Expense> ListByPaymentMethod(int year, PaymentMethod paymentMethod){
         return repository.findByPaymentMethod(year, paymentMethod).stream()
                 .sorted(Comparator.comparing(Expense::getPaymentMethod))
                 .toList();
     }
-
 
     public List<Expense> ListAllExpenses(int year){
         return repository.findAll(year).stream()
@@ -94,6 +92,8 @@ public class ExpenseService {
     }
 
 
+
+    // Analysing methods:
     public BigDecimal totalAmountOfMonth(int year, int month){
         return repository.findByMonth(year, month).stream()
                 .map(Expense::getAmount)
