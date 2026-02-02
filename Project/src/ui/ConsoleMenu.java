@@ -535,7 +535,7 @@ public class ConsoleMenu {
 
 
         while (!validatingNumber) {
-            System.out.println("Do you want to analyze the average expenditure of:\n1 - The year\n2 - A month\n3 - A " +
+            System.out.println("Do you want to analyze the average expenditure of:\n1 - A month\n2 - The year\n3 - A " +
                     "category\n4 - A payment method");
             dataChoice = readOption();
 
