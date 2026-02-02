@@ -187,4 +187,38 @@ public class ExpenseService {
 
         return currentCategory;
     }
+
+    public PaymentMethod mostLeastPaymentMethod(int year, int mostLeastChoice){
+        int enumSize = 4;
+        BigDecimal currentMonth;
+        BigDecimal bestValue = null;
+        PaymentMethod currentPaymentMethod = null;
+        boolean firstValue = true;
+
+        for (PaymentMethod paymentMethod : PaymentMethod.values()){
+            currentMonth = totalAmountOfPaymentMethod(year, paymentMethod);
+
+            if (currentMonth.compareTo(BigDecimal.ZERO) <= 0){
+                continue; // To ignore values like zero or negative ones
+            }
+
+            if (bestValue == null){
+                bestValue = currentMonth;
+                currentPaymentMethod = paymentMethod;
+                continue;
+            }
+
+
+            if (mostLeastChoice == 1 && bestValue.compareTo(currentMonth) < 0){
+                bestValue = currentMonth;
+                currentPaymentMethod = paymentMethod;
+            }
+            if (mostLeastChoice == 2 && bestValue.compareTo(currentMonth) > 0){
+                bestValue = currentMonth;
+                currentPaymentMethod = paymentMethod;
+            }
+        }
+
+        return currentPaymentMethod;
+    }
 }
