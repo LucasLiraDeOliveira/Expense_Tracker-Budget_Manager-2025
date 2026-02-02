@@ -92,4 +92,11 @@ public class ExpenseService {
                 .sorted(Comparator.comparing(Expense::getPaymentMethod))
                 .toList();
     }
+
+
+    public BigDecimal totalAmountOfMonth(int year, int month){
+        return repository.findByMonth(year, month).stream()
+                .map(Expense::getAmount)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
 }
