@@ -245,4 +245,12 @@ public class ExpenseService {
 
         return amountSpent.divide(divisor);
     }
+
+    public BigDecimal averageAmountOfPaymentMethod(int year, PaymentMethod paymentMethod){
+        int numberOfExpenditure = repository.findByPaymentMethod(year, paymentMethod).size();
+        BigDecimal amountSpent = totalAmountOfPaymentMethod(year, paymentMethod);
+        BigDecimal divisor = new BigDecimal(numberOfExpenditure);
+
+        return amountSpent.divide(divisor);
+    }
 }
