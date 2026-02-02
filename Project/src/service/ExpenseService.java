@@ -95,9 +95,15 @@ public class ExpenseService {
 
     // Analysing methods:
     public BigDecimal totalAmountOfMonth(int year, int month){
-        return repository.findByMonth(year, month).stream()
-                .map(Expense::getAmount)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        List<Expense> monthlyExpenses = repository.findByMonth(year, month);
+
+        if (monthlyExpenses.isEmpty()){
+            return BigDecimal.ZERO;
+        }else {
+            return monthlyExpenses.stream()
+                    .map(Expense::getAmount)
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+        }
     }
 
     public BigDecimal totalAmountOfYear(int year){

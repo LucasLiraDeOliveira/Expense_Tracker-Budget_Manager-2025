@@ -348,8 +348,8 @@ public class ConsoleMenu {
 
             switch (option) {
                 case 1 -> AnalyseBySomatoryMenu(year);
-                case 2 -> AnalyseByMostAndLeastMenu(year);
-                case 3 -> AnalyseByAverageMenu(year);
+                //case 2 -> AnalyseByMostAndLeastMenu(year);
+                //case 3 -> AnalyseByAverageMenu(year);
                 case 4 -> hasYear = false;
                 case 0 -> running = false;
                 default -> System.out.println("Invalid option");
@@ -403,10 +403,9 @@ public class ConsoleMenu {
                                 System.out.println("The total amount spent on the 3rd month of " + year + " was R$" +
                                         totalAmount);
                                 break;
-                            case 4:
-                                System.out.println("The total amount spent on the " + dataChoice + "th month was R$" +
-                                totalAmount);
-                                break;
+                            default:
+                                System.out.println("The total amount spent on the " + dataChoice + "th month of " + year +
+                                        " was R$" + totalAmount);
                         }
 
                         validatingNumber = true;
