@@ -508,7 +508,7 @@ public class ConsoleMenu {
                 }
                 break;
             case 2:
-                mostLeastCategory = service.mostLeastCategory(mostLeastChoice, dataChoice);
+                mostLeastCategory = service.mostLeastCategory(year, mostLeastChoice);
 
                 System.out.println("In the year of " + year + ", the category with " + mostLeastWord[1] + " expenditure" +
                         " was " + mostLeastCategory);
