@@ -113,7 +113,7 @@ public class ExpenseService {
     }
 
     public BigDecimal totalAmountOfPaymentMethod(int year, PaymentMethod paymentMethod){
-        return repository.findByPaymentMethod().stream()
+        return repository.findByPaymentMethod(year, paymentMethod).stream()
                 .map(Expense::getAmount)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
