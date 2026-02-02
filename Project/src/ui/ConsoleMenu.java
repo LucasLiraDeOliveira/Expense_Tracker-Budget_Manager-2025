@@ -341,7 +341,7 @@ public class ConsoleMenu {
                 hasYear = true;
             }
 
-            System.out.println("\nDo you want to look into your expenses based on:\n1- The somatory of some parameter" +
+            System.out.println("\nDo you want to look into your expenses based on:\n1 - The somatory of some parameter" +
                     "\n2 - A parameter that spent the most/the least\n3 - Average amount spent on expenses of a " +
                     "parameter\n4 - Change the year of the analysis\n0 - Back to main menu");
             int option = readOption();
@@ -416,7 +416,7 @@ public class ConsoleMenu {
             case 2:
                 totalAmount = service.totalAmountOfYear(year);
 
-                System.out.println("The total amount spent on the year of" + year + " was R$" + totalAmount);
+                System.out.println("The total amount spent on the year of " + year + " was R$" + totalAmount);
                 break;
             case 3:
                 System.out.println("\nDo you want to calculate the amount spent in which Category?");
@@ -424,7 +424,8 @@ public class ConsoleMenu {
 
                 totalAmount = service.totalAmountOfCategory(year, categoryPicked);
 
-                System.out.println("The total amount spent on the year of" + year + " on " + categoryPicked + " was R$" + totalAmount);
+                System.out.println("The total amount spent on the year of " + year + " on " + categoryPicked + " was " +
+                        "R$" + totalAmount);
                 break;
             case 4:
                 System.out.println("\nDo you want to calculate the amount paid by which Payment method:");
@@ -432,7 +433,7 @@ public class ConsoleMenu {
 
                 totalAmount = service.totalAmountOfPaymentMethod(year, paymentMethod);
 
-                System.out.println("The total amount spent on the year of" + year + " with " + paymentMethod + " was " +
+                System.out.println("The total amount spent on the year of " + year + " with " + paymentMethod + " was " +
                         "R$" + totalAmount);
                 break;
             default:
