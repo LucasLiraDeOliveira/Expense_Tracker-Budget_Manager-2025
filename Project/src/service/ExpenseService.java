@@ -229,4 +229,12 @@ public class ExpenseService {
 
         return amountSpent.divide(divisor);
     }
+
+    public BigDecimal averageAmountOfYear(int year){
+        int numberOfExpenditure = repository.findByYear(year).size();
+        BigDecimal amountSpent = totalAmountOfYear(year);
+        BigDecimal divisor = new BigDecimal(numberOfExpenditure);
+
+        return amountSpent.divide(divisor);
+    }
 }
