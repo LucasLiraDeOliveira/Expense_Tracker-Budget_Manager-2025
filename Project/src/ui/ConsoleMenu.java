@@ -349,7 +349,7 @@ public class ConsoleMenu {
             switch (option) {
                 case 1 -> AnalyseBySomatoryMenu(year);
                 case 2 -> AnalyseByMostAndLeastMenu(year);
-                //case 3 -> AnalyseByAverageMenu(year);
+                case 3 -> AnalyseByAverageMenu(year);
                 case 4 -> hasYear = false;
                 case 0 -> running = false;
                 default -> System.out.println("Invalid option");
@@ -524,4 +524,87 @@ public class ConsoleMenu {
         }
     }
 
+    public void AnalyseByAverageMenu(int year){
+        boolean validatingNumber = false;
+        int dataChoice = 0;
+        BigDecimal averageAmount = null;
+
+        Category categoryPicked = null;
+        PaymentMethod paymentMethodPicked = null;
+
+
+        while (!validatingNumber) {
+            System.out.println("Do you want to analyze the average expenditure of:\n1 - The year\n2 - A month\n3 - A " +
+                    "category\n4 - A payment method");
+            dataChoice = readOption();
+
+            if (dataChoice == 1 || dataChoice == 2 || dataChoice == 3 || dataChoice == 4) {
+                validatingNumber = true;
+            }
+        }
+        validatingNumber = false;
+
+        switch (dataChoice) {
+            case 1:
+                while (!validatingNumber) {
+                    System.out.println("Which month of " + year + " you want to choose?  (1  TO  12)");
+                    dataChoice = readOption();
+
+                    if (dataChoice >= 1 && dataChoice <= 12) {
+                        averageAmount = service.averageAmountOfMonth(year, dataChoice);
+
+                        if (averageAmount.compareTo(new BigDecimal("0.00")) == 0) {
+                            System.out.println("In " + year + ", it doesn't have any expense on this month");
+                            continue;
+                        }
+
+                        switch (dataChoice) {
+                            case 1:
+                                System.out.println("The average amount spent on the 1st month of " + year + " was R$" +
+                                        averageAmount);
+                                break;
+                            case 2:
+                                System.out.println("The average amount spent on the 2nd month of " + year + " was R$" +
+                                        averageAmount);
+                                break;
+                            case 3:
+                                System.out.println("The average amount spent on the 3rd month of " + year + " was R$" +
+                                        averageAmount);
+                                break;
+                            default:
+                                System.out.println("The average amount spent on the " + dataChoice + "th month of " + year +
+                                        " was R$" + averageAmount);
+                        }
+
+                        validatingNumber = true;
+                    }
+                }
+                break;
+            case 2:
+                averageAmount = service.averageAmountOfYear(year);
+
+                System.out.println("The average amount spent on the year of " + year + " was R$" + averageAmount);
+                break;
+            case 3:
+                System.out.println("\nDo you want to calculate the amount spent in which Category?");
+                categoryPicked = pickCategory();
+
+                averageAmount = service.averageAmountOfCategory(year, categoryPicked);
+
+                System.out.println("The average amount spent on the year of " + year + " on " + categoryPicked + " was " +
+                        "R$" + averageAmount);
+                break;
+            case 4:
+                System.out.println("\nDo you want to calculate the amount paid by which Payment method:");
+                paymentMethodPicked = pickPaymentMethod();
+
+                averageAmount = service.averageAmountOfPaymentMethod(year, paymentMethodPicked);
+
+                System.out.println("The average amount spent on the year of " + year + " with " + paymentMethodPicked + " was " +
+                        "R$" + averageAmount);
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid option: " + dataChoice);
+        }
+    }
 }
