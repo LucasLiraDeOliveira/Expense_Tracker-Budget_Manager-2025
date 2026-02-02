@@ -348,7 +348,7 @@ public class ConsoleMenu {
 
             switch (option) {
                 case 1 -> AnalyseBySomatoryMenu(year);
-                //case 2 -> AnalyseByMostAndLeastMenu(year);
+                case 2 -> AnalyseByMostAndLeastMenu(year);
                 //case 3 -> AnalyseByAverageMenu(year);
                 case 4 -> hasYear = false;
                 case 0 -> running = false;
@@ -434,6 +434,90 @@ public class ConsoleMenu {
 
                 System.out.println("The total amount spent on the year of " + year + " with " + paymentMethod + " was " +
                         "R$" + totalAmount);
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid option: " + dataChoice);
+        }
+    }
+
+    private void AnalyseByMostAndLeastMenu(int year){
+        boolean validatingNumber = false;
+        int mostLeastChoice = 0;
+        String[] mostLeastWord = new String[2];
+        int dataChoice = 0;
+
+        int mostLeastMonth = 0;
+        Category mostLeastCategory;
+        PaymentMethod mostLeastPaymentMethod;
+
+        while (!validatingNumber) {
+            System.out.println("Do you want to analyze the parameter by the MOST you spent or the LEAST you spent?\n1 - THE" +
+                    " MOST\n2 - THE LEAST");
+            mostLeastChoice = readOption();
+
+            if (mostLeastChoice == 1 || mostLeastChoice == 2) {
+                validatingNumber = true;
+            }
+        }
+
+
+        if (mostLeastChoice == 1){
+            mostLeastWord[0] = "the most";
+            mostLeastWord[1] = "the highest";
+        } else {
+            mostLeastWord[0] = "the least";
+            mostLeastWord[1] = "the lowest";
+        }
+        validatingNumber = false;
+
+
+        while (!validatingNumber){
+            System.out.println("Do you want to analyze:\n1 - Which month you expend " + mostLeastWord[0] + "\n2 - Which" +
+                    " category you expend " + mostLeastWord[0] + "\n3 - Which payment method was " + mostLeastWord[0] +
+                    "used");
+            dataChoice = readOption();
+
+            if (dataChoice == 1 || dataChoice == 2 || dataChoice == 3) {
+                validatingNumber = true;
+            }
+        }
+
+        switch (dataChoice){
+            case 1:
+                mostLeastMonth = service.mostLeastMonth(year, mostLeastChoice);
+
+                switch (mostLeastMonth){
+                    case 1:
+                        System.out.println("In the year of " + year + ", the month with " + mostLeastWord[1] + " " +
+                                "expenditure was the 1st one");
+                        break;
+                    case 2:
+                        System.out.println("In the year of " + year + ", the month with " + mostLeastWord[1] + " " +
+                                "expenditure was the 2nd one");
+                        break;
+                    case 3:
+                        System.out.println("In the year of " + year + ", the month with " + mostLeastWord[1] + " " +
+                                "expenditure was the 3rd one");
+                        break;
+                    case 0:
+                        System.out.println("The year of " + year + " doesn't have any expense");
+                        break;
+                    default:
+                        System.out.println("In the year of " + year + ", the month with " + mostLeastWord[1] + " " +
+                                "expenditure was the " + mostLeastMonth + "th one");
+                }
+                break;
+            case 2:
+                mostLeastCategory = service.mostLeastCategory(mostLeastChoice, dataChoice);
+
+                System.out.println("In the year of " + year + ", the category with " + mostLeastWord[1] + " expenditure" +
+                        " was " + mostLeastCategory);
+                break;
+            case 3:
+                mostLeastPaymentMethod = service.mostLeastPaymentMethod(mostLeastChoice, dataChoice);
+
+                System.out.println("In the year of " + year + ", the payment method used " + mostLeastWord[0] + " was " +
+                        mostLeastPaymentMethod);
                 break;
             default:
                 throw new IllegalArgumentException("Invalid option: " + dataChoice);
