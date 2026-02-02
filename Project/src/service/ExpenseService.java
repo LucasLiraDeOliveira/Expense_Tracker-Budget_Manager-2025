@@ -6,10 +6,7 @@ import model.PaymentMethod;
 import repository.ExpenseRepository;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class ExpenseService {
     ExpenseRepository repository;
@@ -122,5 +119,39 @@ public class ExpenseService {
         return repository.findByPaymentMethod(year, paymentMethod).stream()
                 .map(Expense::getAmount)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    public int mostLeastMonth(int year, int mostLeastChoice){
+        BigDecimal[] mostLeast = new BigDecimal[12];
+        Arrays.fill(mostLeast, BigDecimal.ZERO);
+        BigDecimal auxMonth = BigDecimal.ZERO;
+        int chosenMonth = 0;
+        boolean firstValue = true;
+
+        for (int i = 0; i < mostLeast.length; i++) {
+            mostLeast[i] = totalAmountOfMonth(year, i+1);
+
+            if (mostLeastChoice == 1){
+                if (auxMonth.compareTo(mostLeast[i]) < 0 && mostLeast[i].compareTo(BigDecimal.ZERO) > 0){
+                    auxMonth = mostLeast[i];
+                    chosenMonth = i+1;
+                }
+            } else if (mostLeastChoice == 2){
+                if (firstValue){
+                    if (mostLeast[i].compareTo(BigDecimal.ZERO) > 0){
+                        auxMonth = mostLeast[i];
+                        chosenMonth = i+1;
+                        firstValue = false;
+                    }
+                } else {
+                    if (auxMonth.compareTo(mostLeast[i]) > 0 && mostLeast[i].compareTo(BigDecimal.ZERO) > 0){
+                        auxMonth = mostLeast[i];
+                        chosenMonth = i + 1;
+                    }
+                }
+            }
+        }
+
+        return chosenMonth;
     }
 }
